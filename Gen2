@@ -1,0 +1,106 @@
+public class GenOfCases {
+	public static void main(String[] args) {
+		
+		int c = 8;
+		
+		Case[] myCases = new Case[c];
+			
+		int x = 0;
+	
+	// Создаю объекты для каждой ячейки массива дел:
+	
+	
+		while (x < c) {
+			myCases[x] = new Case();
+			x = x + 1;
+		}
+		
+	// Задаю каждому делу имена:
+		
+		myCases[0].name = "стирка";
+		myCases[1].name = "уборка пыли";
+		myCases[2].name = "готовка";
+		myCases[3].name = "мытьё полов";
+		myCases[4].name = "пылесос";
+		myCases[5].name = "мытьё посуды";
+		myCases[6].name = "вынос мусора";
+		myCases[7].name = "поход в магазин";
+		
+		
+		x = 0;
+	
+	// Суть следующего цикла такова: выбираю случайное дело, случайную персону,
+	//								 вывожу на экран пару (персона - дело),
+	//								 уничтожаю ссылки на выпавшие дело и персону,
+	//								 за этот же проход выбираю второй персоне случайное дело,
+	//								 (проверяю до тех пор, пока ссылка окажется непустой),
+	//								 вывожу на экран пару (персона - дело),
+	//								 уничтожаю ссылки на выпавшие дело и персону,
+	//								 при следующем проходе по новой создаю оъекты персон,
+	//								 и так продолжается до тех пор, пока все дела не кончатся.
+	
+		while (x < (c/2)) {
+		
+			int p = 2;
+			
+			Person[] pers = new Person[p];
+			
+			// Создаю объекты для каждой ячейки массива персон:
+			int z = 0;
+			
+			while(z < p) {
+				pers[z] = new Person();
+				z = z + 1;
+			}
+			
+			// Задаю каждой персоне имя:
+			pers[0].name = "Миша";
+			pers[1].name = "Кристина";
+			
+			int curCase = (int) (Math.random() * 8);
+			int curPers = (int) (Math.random() * 2);
+			
+			while (myCases[curCase] == null) {
+				curCase = (int) (Math.random() * 8);
+			}
+			
+			System.out.println(pers[curPers].name + " - " + myCases[curCase].name);
+			
+			myCases[curCase] = null;
+			pers[curPers] = null;
+			
+			curCase = (int) (Math.random() * 8);
+			curPers = (int) (Math.random() * 2);
+			
+			while (myCases[curCase] == null) {
+				curCase = (int) (Math.random() * 8);
+			}
+			while (pers[curPers] == null) {
+				curPers = (int) (Math.random() * 2);
+			}
+			
+			System.out.println(pers[curPers].name + " - " + myCases[curCase].name);
+			
+			myCases[curCase] = null;
+			pers[curPers] = null;
+			
+			x = x + 1;
+		}
+	}
+}
+		
+class Person {
+	String name;
+	
+	void getName() {
+		System.out.println(name);
+	}
+}
+		
+class Case {
+	String name;
+	
+	void getName() {
+		System.out.println(name);
+	}
+}
